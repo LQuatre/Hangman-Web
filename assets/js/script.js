@@ -2,33 +2,26 @@ document.addEventListener("DOMContentLoaded", function () {
   var preloadElement = document.querySelector(".preload");
   var contentElement = document.querySelector(".content");
 
-  // Check if the elements exist on the page
   if (preloadElement && contentElement) {
-    // Hide the preload element
     setTimeout(function () {
       preloadElement.style.opacity = "0";
     }, 2000);
 
-    // Fade in the content element after the preload is hidden
     setTimeout(function () {
       contentElement.style.opacity = "1";
-    }, 3000); // Adjust the timing as needed
+    }, 3000);
   }
 
-  // Add an event listener to each link to handle the click event
   const navLinks = document.querySelectorAll(".navbar a.nav-link");
 
   navLinks.forEach((link) => {
     link.addEventListener("click", function () {
-      // Remove the 'active' class from all links
       navLinks.forEach((link) => link.classList.remove("active"));
 
-      // Add the 'active' class to the clicked link
       this.classList.add("active");
     });
   });
 
-  // Set the initial active link based on the current hash in the URL
   const currentHash = window.location.hash;
   const activeLink = document.querySelector(
     `.navbar a.nav-link[href="${currentHash}"]`
@@ -37,4 +30,51 @@ document.addEventListener("DOMContentLoaded", function () {
   if (activeLink) {
     activeLink.classList.add("active");
   }
+
+  // function to open/close nav
+  function toggleNav() {
+    // if nav is open, close it
+    if (document.querySelector("nav").style.display !== "none") {
+      document.querySelector("nav").style.display = "none";
+      document.querySelector("button").classList.remove("menu");
+    }
+    // if nav is closed, open it
+    else {
+      document.querySelector("button").classList.add("menu");
+      document.querySelector("nav").style.display = "flex";
+    }
+  }
+
+  // when clicking + or ☰ button
+  document.querySelector("button").addEventListener("click", function () {
+    // when clicking ☰ button, open nav
+    if (document.querySelector("header").classList.contains("open")) {
+      toggleNav();
+    }
+    // when clicking + button, open header
+    else {
+      document.querySelector("header").classList.add("open");
+    }
+  });
+
+  // close nav
+  document.querySelector("#nav-close").addEventListener("click", function () {
+    toggleNav();
+  });
+
+  // scroll to sections
+  document.querySelectorAll("nav li").forEach(function (li) {
+    li.addEventListener("click", function () {
+      // get index of clicked li and select according section
+      var index = Array.from(this.parentNode.children).indexOf(this);
+      var target = document.querySelectorAll("content section")[index];
+
+      toggleNav();
+
+      window.scrollTo({
+        top: target.offsetTop,
+        behavior: "smooth",
+      });
+    });
+  });
 });
