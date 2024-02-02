@@ -222,29 +222,18 @@ nav #nav-close {
 /*Rules */ 
 
 .box {
-  position: relative;
-  width: 50%;
-  height: 100vh;
-  margin: auto;
-  overflow: hidden;
-  overflow-y: scroll; /* Permet le défilement vertical */
-  scrollbar-width: none; /* Pour les navigateurs basés sur Firefox */
-  -ms-overflow-style: none;
+  padding-inline: 20%;
 }
 
 .rules {
-  top: 100%;
   font-size: 15px;
-  text-align: left;
-  text-justify: auto;
   opacity: 0; /* Départ invisible */
   transform: translateY(20px);
   animation: apparition 3s ease forwards;
 }
 
 .title {
-  top: 0;
-  font-size: 150px;
+  font-size: 100px;
   font-weight: bold;
   text-transform: uppercase;
   text-align: center;
