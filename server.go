@@ -10,26 +10,25 @@ func main() {
     http.Handle("/assets/", http.StripPrefix("/assets/", fs))
 
     http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-        http.ServeFile(w, r, "index.html")
+        // Default to serving index.html
+        filePath := "index.html"
+        
+        // If the path is explicitly /hangman.html, serve that file instead.
+        if r.URL.Path == "/hangman.html" {
+            filePath = "hangman.html"
+        }
+        
+        http.ServeFile(w, r, filePath)
     })
 
-    // Serve CSS file
-    http.HandleFunc("/style.css", func(w http.ResponseWriter, r *http.Request) {
-        http.ServeFile(w, r, "assets/style.css")
-    })
-
-    // Serve JS file
-    http.HandleFunc("/script.js", func(w http.ResponseWriter, r *http.Request) {
-        http.ServeFile(w, r, "assets/script.js")
-    })
-
-    // Import CSS and JS files
-    http.HandleFunc("/index.html", func(w http.ResponseWriter, r *http.Request) {
-        http.ServeFile(w, r, "index.html")
-    })
     http.HandleFunc("/assets/style.css", func(w http.ResponseWriter, r *http.Request) {
         http.ServeFile(w, r, "assets/style.css")
     })
+
+    http.HandleFunc("/assets/hangmanstyle.css", func(w http.ResponseWriter, r *http.Request) {
+        http.ServeFile(w, r, "assets/hangmanstyle.css")
+    })
+
     http.HandleFunc("/assets/script.js", func(w http.ResponseWriter, r *http.Request) {
         http.ServeFile(w, r, "assets/script.js")
     })
