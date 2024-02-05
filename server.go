@@ -17,6 +17,10 @@ func main() {
         if r.URL.Path == "/hangman.html" {
             filePath = "hangman.html"
         }
+
+        if r.URL.Path == "/play.html" {
+            filePath = "play.html"
+        }
         
         http.ServeFile(w, r, filePath)
     })
@@ -27,6 +31,10 @@ func main() {
 
     http.HandleFunc("/assets/hangmanstyle.css", func(w http.ResponseWriter, r *http.Request) {
         http.ServeFile(w, r, "assets/hangmanstyle.css")
+    })
+
+    http.HandleFunc("/assets/playstyle.css", func(w http.ResponseWriter, r *http.Request) {
+        http.ServeFile(w, r, "assets/playstyle.css")
     })
 
     http.HandleFunc("/assets/script.js", func(w http.ResponseWriter, r *http.Request) {
