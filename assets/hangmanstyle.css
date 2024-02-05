@@ -1,72 +1,58 @@
 body {
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* Assure que le body prend toute la hauteur de la fenêtre */
-    gap: 150px;
-    background-image: linear-gradient(to top, #555555 0%, #aaaaaa 100%);
-  }
-
-.card {
-      font-family: 'Roboto', sans-serif;
-    z-index: 1;
-    width: 190px;
-    height: 254px;
-    border-radius: 30px;
-    background: lightgrey;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 50px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 26px -18px inset;
-    transition: transform 0.2s; /* Effet de transition pour l'agrandissement */
-    text-decoration: none;  
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Full viewport height */
+  gap: 150px;
+  background-image: linear-gradient(to top, #555 0%, #aaa 100%);
 }
 
-.easy-link {
-    font-weight: bold;
-    color : black;
-    visibility: visible;
-    text-decoration: none; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 100px;
-  }
-  
-  .card-easy:hover {
-    transform: scale(1.5);
-    background-color: rgb(21, 228, 21);
-    transition: transform 1s ease;
-  }
+.card {
+  font-family: 'Roboto', sans-serif;
+  z-index: 1;
+  width: 180px;
+  height: 235px;
+  background: #e0e0e0;
+  border-radius: 35px;
+  box-shadow: 20px 20px 40px #bebebe, -20px -20px 40px #fff;
+  transition: transform 0.2s; /* Smoother scaling transition */
+  text-decoration: none;
+  animation: changeColor 3s infinite alternate;
+  position: relative; /* Needed for absolute positioning of child elements */
+}
 
-  .medium-link {
-    font-weight: bold;
-    color : black;
-    visibility: visible;
-    text-decoration: none; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 100px;
-  }
-  
-  .card-medium:hover {
-    transform: scale(1.5);
-    background-color: rgb(228, 145, 21);
-    transition: transform 1s ease;
-  }
+.card a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+}
 
-  .hardcore-link {
-    font-weight: bold;
-    color : black;
-    visibility: visible;
-    text-decoration: none; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 100px;
-  }
-  
-  .card-hard:hover {
-    transform: scale(1.5);
-    background-color: rgb(228, 21, 21);
-    transition: transform 1s ease;
-  }
+/* Simplify hover effects */
+.card-easy:hover, .card-medium:hover, .card-hard:hover {
+  transform: scale(1.25);
+  transition: transform 1s ease;
+}
+
+.card-easy:hover {
+  background: linear-gradient(to bottom right, rgb(160, 238, 136) 40%, rgb(0, 255, 0) 80%);
+}
+
+.card-medium:hover {
+  background: linear-gradient(to bottom right, rgb(238, 200, 136) 40%, rgb(223, 147, 32) 80%);
+}
+
+.card-hard:hover {
+  background: linear-gradient(to bottom right, rgb(238, 136, 136) 40%, rgb(223, 32, 32) 80%);
+}
+
+
