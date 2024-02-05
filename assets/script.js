@@ -2,9 +2,14 @@ document.addEventListener("DOMContentLoaded", function () {
   var preloadElement = document.querySelector(".preload");
   var dotcontentElement = document.querySelector(".content");
   var contentElement = document.querySelector("content");
-  var headerElement = document.querySelector("header")
+  var headerElement = document.querySelector("header");
 
-  if (preloadElement && contentElement) {
+  if (preloadElement && contentElement && dotcontentElement && headerElement) {
+    preloadElement.style.opacity = "1";
+    dotcontentElement.style.opacity = "0";
+    contentElement.style.opacity = "0";
+    headerElement.style.opacity = "0";
+
     setTimeout(function () {
       preloadElement.style.opacity = "0";
       preloadElement.style.transition = "opacity 1s";
