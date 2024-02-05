@@ -1,0 +1,11 @@
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Full viewport height */
+    gap: 150px;
+    background-image: linear-gradient(to top, #555 0%, #aaa 100%);
+  }
+
+  
