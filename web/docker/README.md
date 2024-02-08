@@ -16,3 +16,10 @@ To install and run this project, follow these steps:
 Once you've launched the project, you can play "Modern Hangman Web" by opening your web browser and navigating to `[UNKNOWN FOR NOW]`.
 
 Thank you for taking the time to read this README, and I hope you enjoy playing "Modern Hangman Web"!
+
+## Docker 
+
+1. Get Docker Desktop : https://www.docker.com/products/docker-desktop/ and setup 
+2. Open the website project. 
+3. Open a new Terminal and write "docker-compose up -d" 
+4. type localhost on your browser . 
