@@ -4,7 +4,15 @@ import (
 	"fmt"
 	"net/http"
 	"text/template"
+
+	"github.com/LQuatre/hangman-classic/core"
 )
+
+type TemplateData struct {
+    WordToGuess string
+}
+
+var HangmanData core.HangManData
 
 func Run() {
 	fs := http.FileServer(http.Dir("web/assets"))
@@ -49,6 +57,12 @@ func Run() {
 	http.HandleFunc("/play", func(w http.ResponseWriter, r *http.Request) {
 		method := r.Method
 
+		tmpl, err := template.ParseFiles("web/template/play.html")
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
 		if method == "POST" {
 			r.ParseForm()
 			difficulty := r.Form.Get("difficulty")
@@ -56,9 +70,20 @@ func Run() {
 			fmt.Println("Form data: ", r.Form)
 			fmt.Println(difficulty)
 
-			template.Must(template.ParseFiles("web/template/play.html")).Execute(w, nil)
+			HangmanData = Init(difficulty);
+
+			fmt.Println(HangmanData)
 		} else if method == "GET" {
-			fmt.Println("GET request successful")
+			text := r.URL.Query().Get("text")
+			fmt.Printf("GET request successful, input: %s\n", text)
+		}
+
+		data := TemplateData{
+			WordToGuess: HangmanData.ToFind,
+		}
+		err = tmpl.Execute(w, data)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
 	})
 
