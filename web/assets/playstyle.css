@@ -8,23 +8,56 @@ body {
     background-image: linear-gradient(to top, #555 0%, #aaa 100%);
 }
 
-.input {
-    border: none;
-    outline: none;
-    border-radius: 15px;
-    padding: 1em;
-    background-color: #ccc;
-    box-shadow: inset 2px 5px 10px rgba(0,0,0,0.3);
-    transition: 300ms ease-in-out;
-  }
-  
-  .input:focus {
-    background-color: white;
-    transform: scale(1.05);
-    box-shadow: 13px 13px 100px #969696,
-               -13px -13px 100px #ffffff;
-  }
+form {
 
-  .text {
-    font-family: "Roboto", sans-serif;
-  }
+  display:flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+
+}
+
+label {
+
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333;
+
+}
+
+input {
+
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+      font-size: 16px;
+      color: #555;
+      background-color: #f5f5f5;
+      transition: border-color 0.3s ease;
+
+      
+
+}
+
+button {
+
+   background-color: #007bff;
+    color: #fff;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+
+
+}
