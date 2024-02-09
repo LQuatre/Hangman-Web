@@ -1,0 +1,14 @@
+Lucas:10:etagere
+Lucas:2:mur
+John:7:ecriture
+legend:4:matelas
+marfy:5:mousse
+Lucas:10:recreation
+Lucas:10:entree
+Ald:8:porte
+Lucas:9:classe
+L4:2:pontil
+LQuatre:10:poubelle
+Lucas:9:banc
+Lucas:10:escalier
+ok:10:escalier
