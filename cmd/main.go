@@ -1,9 +1,9 @@
 package main
 
 import (
-	"fmt"
+	"main/pkg"
 )
 
 func main() {
-	// This is the main entry point for the application.
-} 
+	pkg.Run()
+}

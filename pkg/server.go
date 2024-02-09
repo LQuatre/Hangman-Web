@@ -1,45 +1,49 @@
-package main
+package pkg
 
 import (
 	"fmt"
-	"io/ioutil"
 	"net/http"
 	"text/template"
 )
 
-func main() {
-	fs := http.FileServer(http.Dir("assets"))
+func Run() {
+	fs := http.FileServer(http.Dir("web/assets"))
 	http.Handle("/assets/", http.StripPrefix("/assets/", fs))
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println("Url path: ", r.URL.Path)
+
 		// Default to serving index.html
-		filePath := "index.html"
+		if r.URL.Path == "/" || r.URL.Path == "/index.html" {
+			http.ServeFile(w, r, "web/template/index.html")
+			fmt.Println("Index.html served")
+		}
 
 		// If the path is explicitly /hangman.html, serve that file instead.
-		if r.URL.Path == "/hangman.html" {
-			filePath = "hangman.html"
+		if r.URL.Path == "/hangman.html" || r.URL.Path == "/web/template/hangman.html" {
+			http.ServeFile(w, r, "web/template/hangman.html")
+			fmt.Println("Hangman.html served")
 		}
-		if r.URL.Path == "/play.html" {
-			filePath = "play.html"
+		if r.URL.Path == "/play.html" || r.URL.Path == "/web/template/play.html" {
+			http.ServeFile(w, r, "web/template/play.html")
+			fmt.Println("Play.html served")
 		}
-
-		http.ServeFile(w, r, filePath)
 	})
 
 	http.HandleFunc("/assets/style.css", func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "assets/style.css")
+		http.ServeFile(w, r, "web/assets/style.css")
 	})
 
 	http.HandleFunc("/assets/hangmanstyle.css", func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "assets/hangmanstyle.css")
+		http.ServeFile(w, r, "web/assets/hangmanstyle.css")
 	})
 
 	http.HandleFunc("/assets/playstyle.css", func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "assets/playstyle.css")
+		http.ServeFile(w, r, "web/assets/playstyle.css")
 	})
 
 	http.HandleFunc("/assets/script.js", func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "assets/script.js")
+		http.ServeFile(w, r, "web/assets/script.js")
 	})
 
 	http.HandleFunc("/play", func(w http.ResponseWriter, r *http.Request) {
@@ -52,32 +56,7 @@ func main() {
 			fmt.Println("Form data: ", r.Form)
 			fmt.Println(difficulty)
 
-			// Modif
-			var wordFile string
-			switch difficulty {
-			case "easy":
-				wordFile = "hangman-classic/assets/Dictionary/words.txt"
-			case "medium":
-				wordFile = "hangman-classic/assets/Dictionary/words2.txt"
-			case "hard":
-				wordFile = "hangman-classic/assets/Dictionary/words3.txt"
-			default:
-				// Par défaut, choisir le niveau facile
-				wordFile = "hangman-classic/assets/Dictionary/words.txt"
-			}
-
-			// Lire le contenu du fichier de mots
-			words, err := ioutil.ReadFile(wordFile)
-			if err != nil {
-				http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-				return
-			}
-
-			fmt.Println("Words: ", string(words))
-
-			// Traitez les mots comme on le souhaite dans l'application
-
-			template.Must(template.ParseFiles("play.html")).Execute(w, nil)
+			template.Must(template.ParseFiles("web/template/play.html")).Execute(w, nil)
 		} else if method == "GET" {
 			fmt.Println("GET request successful")
 		}
