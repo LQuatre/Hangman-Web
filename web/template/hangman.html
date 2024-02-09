@@ -1,31 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/hangmanstyle.css" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/hangmanstyle.css" />
     <title>Hangman</title>
-    <script src="../assets/script.js"></script>
-</head>
-<body>
+    <script src="assets/script.js"></script>
+  </head>
+  <body>
     <div class="card card-easy">
-        <form action="/play" method="POST">
-            <input type="hidden" name="difficulty" value="easy">
-            <button type="submit" class="easy-link">EASY</button>
-        </form>
+      <form action="/play" method="POST">
+        <input type="hidden" name="difficulty" value="easy" />
+        <button type="submit" class="easy-link">EASY</button>
+      </form>
     </div>
     <div class="card card-medium">
-        <form action="/play" method="POST">
-            <input type="hidden" name="difficulty" value="medium">
-            <button type="submit" class="medium-link">MEDIUM</button>
-        </form>
+      <form action="/play" method="POST">
+        <input type="hidden" name="difficulty" value="medium" />
+        <button type="submit" class="medium-link">MEDIUM</button>
+      </form>
     </div>
     <div class="card card-hard">
-        <form action="/play" method="POST">
-            <input type="hidden" name="difficulty" value="hard">
-            <button type="submit" class="hardcore-link">HARD</button>
-        </form>
+      <form action="/play" method="POST">
+        <input type="hidden" name="difficulty" value="hard" />
+        <button type="submit" class="hardcore-link">HARD</button>
+      </form>
     </div>
-
-</body>
+  </body>
 </html>
