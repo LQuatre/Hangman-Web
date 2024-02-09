@@ -27,8 +27,6 @@ Thank you for taking the time to read this README, and I hope you enjoy playing 
     or you can see someting like that on your terminal : 
 
      - Network docker_default         Created
-    ✔ Container docker-phpmyadmin-1  Started
-    ✔ Container docker-db-1          Started 
-    ✔ Container docker-www-1         Started 
-
-    
+     - ✔ Container docker-phpmyadmin-1  Started
+     - ✔ Container docker-db-1          Started 
+     - ✔ Container docker-www-1         Started
