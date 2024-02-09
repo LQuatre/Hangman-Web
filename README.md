@@ -17,13 +17,16 @@ Once you've launched the project, you can play "Modern Hangman Web" by opening y
 
 Thank you for taking the time to read this README, and I hope you enjoy playing "Modern Hangman Web"!
 
-## Docker 
+## Requiered  
 
-1. Get Docker Desktop : https://www.docker.com/products/docker-desktop/ and setup 
-2. Open the website project. 
-3. Open a new Terminal and write "cd .\web\ " | "cd .\docker\" and after "docker-compose up -d" 
-4. type localhost on your browser . 
-5. You can check on the docker desktop if it correctly launch. 
+1. Docker Desktop : https://www.docker.com/products/docker-desktop/
+
+## Installation
+
+1. Open the website project. 
+2. Open a new Terminal and write "cd .\web\ " | "cd .\docker\" and after "docker-compose up -d" 
+3. type localhost on your browser . 
+4. You can check on the docker desktop if it correctly launch. 
     or you can see someting like that on your terminal : 
 
      - Network docker_default         Created
