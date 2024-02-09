@@ -1,22 +1,23 @@
 package pkg
 
 import (
+	"fmt"
 	"math/rand"
 	"strings"
 
 	"github.com/LQuatre/hangman-classic/core"
 )
 
-func Init(difficulty string) {
+func Init(difficulty string) core.HangManData {
 	MyHangManData := core.HangManData{}
 	var openFile []string
 	switch difficulty {
 	case "easy":
-		openFile = core.ReadFile("../assets/Dictionnary/words.txt")
+		openFile = core.ReadFile("pkg/assets/Dictionnary/words.txt")
 	case "medium":
-		openFile = core.ReadFile("../assets/Dictionnary/words2.txt")
+		openFile = core.ReadFile("pkg/assets/Dictionnary/words2.txt")
 	case "hard":
-		openFile = core.ReadFile("../assets/Dictionnary/words3.txt")
+		openFile = core.ReadFile("pkg/assets/Dictionnary/words3.txt")
 	}
 	lenFile := len(openFile)
 	random := rand.Intn(lenFile)
@@ -34,5 +35,6 @@ func Init(difficulty string) {
 	for i := 0; i < numberOfLettersToReveal; i++ {
 		MyHangManData.Word = MyHangManData.Word[:i] + LettersToReveal[i] + MyHangManData.Word[i+1:]
 	}
-
+	fmt.Printf("Word to find: %s\n", MyHangManData.ToFind)
+	return MyHangManData
 }
