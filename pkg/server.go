@@ -9,7 +9,7 @@ import (
 )
 
 type TemplateData struct {
-    WordToGuess string
+	WordToGuess string
 }
 
 var HangmanData core.HangManData
@@ -70,7 +70,7 @@ func Run() {
 			fmt.Println("Form data: ", r.Form)
 			fmt.Println(difficulty)
 
-			HangmanData = Init(difficulty);
+			HangmanData = Init(difficulty)
 
 			fmt.Println(HangmanData)
 		} else if method == "GET" {
@@ -81,6 +81,7 @@ func Run() {
 		data := TemplateData{
 			WordToGuess: HangmanData.ToFind,
 		}
+
 		err = tmpl.Execute(w, data)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
