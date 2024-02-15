@@ -8,10 +8,10 @@ import (
 	"github.com/LQuatre/hangman-classic/core"
 )
 
-func Init(difficulty string) core.HangManData {
-	MyHangManData := core.HangManData{}
+func Init(difficulty string) core.HangManData { //initialiser les données du jeu du pendu en fonction du niveau de difficulté.
+	MyHangManData := core.HangManData{} //Initialise une variable MyHangManData de type core.HangManData qui contiendra les données du jeu.
 	var openFile []string
-	switch difficulty {
+	switch difficulty { //strcuture de contrôle switch sélectionnant le fichier de mots en fonction de difficulté
 	case "easy":
 		openFile = core.ReadFile("pkg/assets/Dictionnary/words.txt")
 	case "medium":
@@ -21,7 +21,7 @@ func Init(difficulty string) core.HangManData {
 	}
 	lenFile := len(openFile)
 	random := rand.Intn(lenFile)
-	MyHangManData.ToFind = openFile[random]
+	MyHangManData.ToFind = openFile[random] // mot aléatoire mit dans la variable MyHangManData
 
 	lettersList := strings.Split(MyHangManData.ToFind, "")
 	MyHangManData.WordLength = len(lettersList)
