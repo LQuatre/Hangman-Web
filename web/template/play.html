@@ -1,32 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="..\assets\playstyle.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="..\assets\playstyle.css" />
     <title>Play</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="ma-boite">
-        <form action="./play" method="GET"></form>
-            <div id="word-to-guess">
-                <label id="word-to-guess-label">Word to guess: </label>
-                <span id="word-to-guess-span">{{.WordToGuess}}</span>
-              </div>
-              
-            <div class="wordfind">
-                <h1 class="h1wordfind">WORD TO FIND</h1>
-            </div>
-    
-            <div class="hangman-box">
-                <h1 class="word-use">letter used</h1>
-                
-                <input type="text" name="text" id="text"  class="input" placeholder="Letter or word....">
-                <button type="submit" class="btn">Submit</button>
-    
-                <img class="hangman-img" src="./img/hangman5.png"></div>
-            </div>
-        </form>
+      <div class="wordfind">
+        <h1 class="h1wordfind">{{.Word}}</h1>
+      </div>
+
+      <div class="informations">
+        <h1 class="informations-h1">Informations</h1>
+        <p class="informations-p">You have {{.Attempts}} try left</p>
+        <p class="informations-p">The word has {{.WordLength}} letters</p>
+      </div>
+
+      <div class="hangman-box">
+        <div class="the-form">
+          <h1 class="information-go">{{.Info}}</h1>
+          <h1 class="word-use">input used :</h1>
+          <span class="letter-used-span">{{.LetterUsed}}</span>
+          <form action="./play" method="GET" class="form-text">
+            <input
+              type="text"
+              name="text"
+              id="text"
+              class="input"
+              placeholder="Letter or word...."
+            />
+            <button type="submit" class="btn">Submit</button>
+          </form>
+        </div>
+        <img class="hangman-img" src="{{.Image}}" alt="Hangman Image" />
+      </div>
     </div>
-</body>
+  </body>
 </html>

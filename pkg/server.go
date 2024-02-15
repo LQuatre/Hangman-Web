@@ -2,21 +2,37 @@ package pkg
 
 import (
 	"fmt"
+	"html/template"
+	"image"
 	"net/http"
-	"text/template"
+	"strconv"
 
 	"github.com/LQuatre/hangman-classic/core"
 )
 
 type TemplateData struct {
-	WordToGuess string
+	Word        string
+	Attempts    int
+	WordLength  int
+	LetterUsed  []string
+	Info 	  	string
+	Image 		string
 }
 
 var HangmanData core.HangManData
+var usedLetters []string
+var displayInfo string
+var displayWord string
+var myImage image.Image
 
 func Run() {
 	fs := http.FileServer(http.Dir("web/assets"))
 	http.Handle("/assets/", http.StripPrefix("/assets/", fs))
+
+	
+	fs = http.FileServer(http.Dir("web/assets/img"))
+	http.Handle("/assets/img/", http.StripPrefix("/assets/img/", fs))
+
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Url path: ", r.URL.Path)
@@ -54,6 +70,12 @@ func Run() {
 		http.ServeFile(w, r, "web/assets/script.js")
 	})
 
+	for i := 0; i <= 10; i++ {
+		http.HandleFunc(fmt.Sprintf("/assets/img/hangman%d.png", i), func(w http.ResponseWriter, r *http.Request) {
+			http.ServeFile(w, r, fmt.Sprintf("web/assets/img/hangman%d.png", i))
+		})
+	}
+
 	http.HandleFunc("/play", func(w http.ResponseWriter, r *http.Request) {
 		method := r.Method
 
@@ -66,20 +88,32 @@ func Run() {
 		if method == "POST" {
 			r.ParseForm()
 			difficulty := r.Form.Get("difficulty")
-			fmt.Println("POST request successful")
-			fmt.Println("Form data: ", r.Form)
-			fmt.Println(difficulty)
-
+			usedLetters = []string{}
 			HangmanData = Init(difficulty)
-
-			fmt.Println(HangmanData)
 		} else if method == "GET" {
 			text := r.URL.Query().Get("text")
-			fmt.Printf("GET request successful, input: %s\n", text)
+			displayInfo, *tmpl, usedLetters, HangmanData, err = ThisHangman(text, usedLetters, HangmanData)
+			if err != nil {
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+				return
+			}
 		}
 
+		displayWord = ""
+		for i := 0; i < len(HangmanData.Word); i++ {
+			displayWord += string(HangmanData.Word[i]) + " "
+		}
+
+		urlImage := "web/assets/img/hangman"+strconv.Itoa(0+(0-HangmanData.Attempts))+".png"
+	
+
 		data := TemplateData{
-			WordToGuess: HangmanData.ToFind,
+			Word: 	  displayWord,
+			Attempts: HangmanData.Attempts,
+			WordLength: HangmanData.WordLength,
+			LetterUsed: usedLetters,
+			Info: displayInfo,
+			Image: urlImage,
 		}
 
 		err = tmpl.Execute(w, data)
