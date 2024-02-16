@@ -79,6 +79,7 @@ func ThisHangman(text string, usedLetters []string, HangmanData core.HangManData
 			} else {
 				if text != HangmanData.ToFind {
 					HangmanData.Attempts = HangmanData.Attempts - 2
+					HangmanData.Word = HangmanData.ToFind
 				}
 			}
 		}
