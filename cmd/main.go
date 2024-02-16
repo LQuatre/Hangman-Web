@@ -1,5 +1,9 @@
 package main
 
+import (
+	"main/web"
+)
+
 func main() {
-	handler.Run()
+	web.Run()
 }
