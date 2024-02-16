@@ -93,11 +93,11 @@ header button:after {
 }
 header button:before {
   content: "";
-  opacity: 0;
   left: 53px;
 }
 header button:after {
   content: "";
+  opacity: 0;
   left: 0;
 }
 header .triangle {
@@ -135,10 +135,11 @@ header.open button {
 }
 header.open button:before {
   left: 100%;
+  opacity: 0;
 }
 header.open button:after {
-  opacity: 0;
   left: 18px;
+  opacity: 1;
 }
 header.open button.menu {
   width: 100%;
