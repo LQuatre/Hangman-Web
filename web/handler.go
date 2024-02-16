@@ -1,4 +1,4 @@
-package pkg
+package handler
 
 import (
 	"fmt"
@@ -6,6 +6,8 @@ import (
 	"image"
 	"net/http"
 	"strconv"
+
+	game "main/internal"
 
 	"github.com/LQuatre/hangman-classic/core"
 )
@@ -89,10 +91,10 @@ func Run() {
 			r.ParseForm()
 			difficulty := r.Form.Get("difficulty")
 			usedLetters = []string{}
-			HangmanData = Init(difficulty)
+			HangmanData = game.Init(difficulty)
 		} else if method == "GET" {
 			text := r.URL.Query().Get("text")
-			displayInfo, *tmpl, usedLetters, HangmanData, err = ThisHangman(text, usedLetters, HangmanData)
+			displayInfo, *tmpl, usedLetters, HangmanData, err = game.ThisHangman(text, usedLetters, HangmanData)
 			if err != nil {
 				http.Error(w, err.Error(), http.StatusInternalServerError)
 				return
