@@ -57,6 +57,7 @@ func LoadImage(path string) (image.Image, error) { //fonction qui charge une ima
 }
 
 func ThisHangman(text string, usedLetters []string, HangmanData core.HangManData) (string, template.Template, []string, core.HangManData, error) { 
+	var displayInfo string
 	tmpl, err := template.ParseFiles("web/template/play.html")
 	if err != nil {
 		return "", *tmpl, []string{}, core.HangManData{}, err
