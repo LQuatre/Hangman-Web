@@ -73,41 +73,31 @@ func ThisHangman(text string, usedLetters []string, HangmanData core.HangManData
 				letterFound, _ := core.Contains(HangmanData.ToFind, text)
 				if letterFound {
 					HangmanData.Word = RevealedLetters(HangmanData.Word, HangmanData.ToFind, text)
-					if HangmanData.Word == HangmanData.ToFind {
-						tmpl, err = template.ParseFiles("web/template/win.html")
-						if err != nil {
-							return "", *tmpl, []string{}, core.HangManData{}, err
-						}
-					}
 				} else {
-					HangmanData.Attempts--
-					if HangmanData.Attempts == 0 {
-						tmpl, err = template.ParseFiles("web/template/loose.html")
-						if err != nil {
-							return "", *tmpl, []string{}, core.HangManData{}, err
-						}
-					}
-					
+					HangmanData.Attempts--					
 				}
 			} else {
-				if text == HangmanData.ToFind {
-					tmpl, err = template.ParseFiles("web/template/win.html")
-					if err != nil {
-						return "", *tmpl, []string{}, core.HangManData{}, err
-					}
-				} else {
+				if text != HangmanData.ToFind {
 					HangmanData.Attempts = HangmanData.Attempts - 2
-					if HangmanData.Attempts == 0 {
-						tmpl, err = template.ParseFiles("web/template/loose.html")
-						if err != nil {
-							return "", *tmpl, []string{}, core.HangManData{}, err
-						}
-					}
 				}
 			}
 		}
 	} else {
 		displayInfo = "Please enter a letter"
+	}
+
+	if HangmanData.Word == HangmanData.ToFind {
+		tmpl, err = template.ParseFiles("web/template/win.html")
+		if err != nil {
+			return "", *tmpl, []string{}, core.HangManData{}, err
+		}
+	}
+
+	if HangmanData.Attempts == 0 {
+		tmpl, err = template.ParseFiles("web/template/loose.html")
+		if err != nil {
+			return "", *tmpl, []string{}, core.HangManData{}, err
+		}
 	}
 
 	return displayInfo, *tmpl, usedLetters, HangmanData, nil
